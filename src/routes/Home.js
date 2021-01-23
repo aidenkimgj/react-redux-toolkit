@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { actionCreators } from "../store";
+import { add } from "../store";
 import ToDo from "../components/ToDo.js";
 
 const Home = ({ toDos, addToDo }) => {
-  // console.log(toDos);
+  console.log(toDos);
   console.log(addToDo);
   const [text, setText] = useState("");
 
@@ -15,9 +15,9 @@ const Home = ({ toDos, addToDo }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    setText("");
     console.log(text);
     addToDo(text);
+    setText("");
   };
 
   // const saveLocalStorage = toDos => {
@@ -54,9 +54,15 @@ const mapStateToProps = state => {
   return { toDos: state };
 };
 // dispatch는 함수이다 이것이 reducer에 값을 전달한다. (store.dispatch() 와 같은 역할)
+/* const mapDispatchToProps = dispatch => {
+  return {
+    addToDo: text => dispatch(add(text)),
+  };
+}; */
+
 const mapDispatchToProps = dispatch => {
   return {
-    addToDo: text => dispatch(actionCreators.addToDo(text)),
+    addToDo: text => dispatch(add(text)),
   };
 };
 
